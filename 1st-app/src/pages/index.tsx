@@ -4,7 +4,8 @@ export default function Home({org}) {
       <div>
 
         <h1>Hi</h1>
-  <h3>{org}</h3>
+        <h3>{org.name}</h3>
+        <img src={org.avatar_url} alt={org.name} width="80" style={{ borderRadius:40 }}/>
       </div>
     
     
@@ -13,13 +14,14 @@ export default function Home({org}) {
 
 export const getStaticProps = async () => {
     
-    const response = await fetch('https://3000-e7c4d607-7e52-489f-8344-8bde59017c8c.ws-eu03.gitpod.io/api/hello');
+    const response = await fetch('https://api.github.com/users/MiranteDev');
     const data = await response.json();
     
     return {
         props: {
             org: data,
-        }
+        },
+        revalidate: 10
     }
 };
 
